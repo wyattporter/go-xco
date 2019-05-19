@@ -2,7 +2,6 @@ package xco
 
 import (
 	"encoding/xml"
-	"log"
 	"net"
 
 	"github.com/pkg/errors"
@@ -26,7 +25,7 @@ type Component struct {
 	conn net.Conn
 	dec  *xml.Decoder
 	enc  *xml.Encoder
-	log  *log.Logger
+	log  Logger
 
 	stateFn stateFn
 

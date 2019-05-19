@@ -2,11 +2,14 @@ package xco
 
 import (
 	"io"
-	"log"
 )
 
+type Logger interface {
+	Printf(string, ...interface{})
+}
+
 type writeLogger struct {
-	log *log.Logger
+	log Logger
 	w   io.Writer
 }
 
@@ -22,12 +25,12 @@ func (l *writeLogger) Write(p []byte) (n int, err error) {
 
 // newWriteLogger returns a writer that behaves like w except that it
 // logs the string written.
-func newWriteLogger(log *log.Logger, w io.Writer) io.Writer {
+func newWriteLogger(log Logger, w io.Writer) io.Writer {
 	return &writeLogger{log, w}
 }
 
 type readLogger struct {
-	log *log.Logger
+	log Logger
 	r   io.Reader
 }
 
@@ -43,6 +46,6 @@ func (l *readLogger) Read(p []byte) (n int, err error) {
 
 // newReadLogger returns a reader that behaves like r except that it
 // logs the string read.
-func newReadLogger(log *log.Logger, r io.Reader) io.Reader {
+func newReadLogger(log Logger, r io.Reader) io.Reader {
 	return &readLogger{log, r}
 }

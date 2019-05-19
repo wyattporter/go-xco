@@ -1,8 +1,6 @@
 package xco
 
 import (
-	"log"
-
 	"context"
 )
 
@@ -24,7 +22,7 @@ type Options struct {
 	// Logger is an optional logger to which to send raw XML stanzas
 	// sent and received.  It's primarily intended for debugging and
 	// development.
-	Logger *log.Logger
+	Logger Logger
 }
 
 // NewComponent creates a new component from the given options
